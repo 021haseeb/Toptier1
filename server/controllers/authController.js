@@ -4,7 +4,17 @@ const { validationResult } = require('express-validator');
 
 // Generate JWT token
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+  // Validate JWT_SECRET is set
+  if (!process.env.JWT_SECRET) {
+    console.error('FATAL: JWT_SECRET is not defined. Please set JWT_SECRET in your environment variables.');
+    // In production, we might want to exit, but for now we'll use a fallback with warning
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('JWT_SECRET must be set in production');
+    }
+    console.warn('WARNING: Using temporary JWT_SECRET for development. This is not secure!');
+  }
+  
+  return jwt.sign({ id }, process.env.JWT_SECRET || 'dev-secret-do-not-use-in-prod', {
     expiresIn: process.env.JWT_EXPIRE || '7d'
   });
 };

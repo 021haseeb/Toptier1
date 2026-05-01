@@ -236,11 +236,11 @@ const Properties = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  <Link to={`/properties/${property._id}`} className="group block">
+<Link to={`/properties/${property._id}`} className="group block">
                     <div className="glass-card-hover overflow-hidden h-full">
                       <div className="relative h-56 overflow-hidden">
                         <img
-                          src={property.images[0]}
+                          src={property.images?.[0] || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800'}
                           alt={property.title}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />

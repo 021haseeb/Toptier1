@@ -95,17 +95,21 @@ const PropertyDetails = () => {
 
   return (
     <div className="min-h-screen pt-20 pb-16">
-      {/* Image Gallery */}
+{/* Image Gallery */}
       <div className="relative h-[50vh] lg:h-[70vh] overflow-hidden">
-        <motion.img
+        <motion.div
           key={currentImageIndex}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          src={property.images[currentImageIndex]}
-          alt={property.title}
-          className="w-full h-full object-cover"
-        />
+          className="w-full h-full"
+        >
+          <img
+            src={property.images?.[currentImageIndex] || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200'}
+            alt={property.title}
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
         <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent" />
         
         {/* Navigation */}
@@ -194,9 +198,9 @@ const PropertyDetails = () => {
                     <p className="text-white font-semibold">{property.sqft.toLocaleString()}</p>
                     <p className="text-white/50 text-sm">Sq Ft</p>
                   </div>
-                  <div className="text-center p-4 rounded-xl bg-white/5">
+<div className="text-center p-4 rounded-xl bg-white/5">
                     <Calendar className="w-6 h-6 text-primary mx-auto mb-2" />
-                    <p className="text-white font-semibold">{property.yearBuilt}</p>
+                    <p className="text-white font-semibold">{property.yearBuilt || 'N/A'}</p>
                     <p className="text-white/50 text-sm">Year Built</p>
                   </div>
                 </div>
